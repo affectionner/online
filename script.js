@@ -18,6 +18,12 @@ let z = 10;
       btn.classList.remove('active');
       if (img) img.classList.remove('show');
 
+      // shrink desktop area if no windows left open
+      if (!isMobile()) {
+        const stillOpen = document.querySelectorAll('#da .win.show').length;
+        da.style.minHeight = stillOpen > 0 ? '420px' : '0px';
+      }
+
       if (isMobile()) {
         // Remove from mobile panel
         if (win.parentNode === panel) panel.removeChild(win);
@@ -59,6 +65,9 @@ let z = 10;
       btn.classList.add('active');
       z++; win.style.zIndex = z;
       if (img) { img.classList.add('show'); z++; img.style.zIndex = z; }
+
+      // expand desktop area to fit windows
+      if (!isMobile()) da.style.minHeight = '420px';
     }
   }
 
@@ -73,6 +82,9 @@ let z = 10;
       panel.removeChild(win);
       da.appendChild(win);
       if (!panel.querySelector('.win')) panel.classList.remove('has-content');
+    } else {
+      const stillOpen = document.querySelectorAll('#da .win.show').length;
+      da.style.minHeight = stillOpen > 0 ? '420px' : '0px';
     }
   }
 

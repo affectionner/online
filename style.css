@@ -183,12 +183,12 @@
     width: 100%;
     background: transparent;
     border: none;
-    padding: 20px 20px 4px;
+    padding: 16px 16px 12px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: 4px;
     z-index: 20;
     overflow-x: auto;
   }
@@ -205,19 +205,19 @@
     border: none;
     background: transparent;
     border-radius: 8px;
-    margin: 0 4px;
+    margin: 0 2px;
     transition: background .15s, transform .12s;
     font-family: 'Courier New', monospace;
-    min-width: 64px;
+    min-width: 68px;
   }
-  .folder-btn:hover { background: rgba(244,97,74,.15); transform: translateY(-2px); }
-  .folder-btn.active { background: rgba(244,97,74,.28); }
-  .folder-icon { width: 52px; height: 42px; }
+  .folder-btn:hover { background: rgba(244,97,74,.12); transform: translateY(-2px); }
+  .folder-btn.active { background: rgba(244,97,74,.22); }
+  .folder-icon { width: 48px; height: 38px; }
   .folder-icon svg { width: 100%; height: 100%; }
-  .folder-label { font-size: 10px; color: var(--dark); text-align: center; line-height: 1.3; max-width: 72px; }
+  .folder-label { font-size: 10px; font-weight: bold; color: var(--dark); text-align: center; line-height: 1.3; max-width: 72px; }
 
   .desktop { flex-direction: column; }
-  .desktop-area { width: 100%; min-height: 460px; position: relative; overflow: hidden; border-top: 1px solid var(--blush); margin-top: 4px; }
+  .desktop-area { width: 100%; min-height: 0; height: auto; position: relative; overflow: visible; border-top: 1px solid var(--blush); margin-top: 4px; }
   .wallpaper-txt {
     position: absolute;
     bottom: 10px; right: 14px;
