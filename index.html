@@ -729,7 +729,72 @@
   }
 
   .in-cta { max-width: 860px; }
+
+  /* ─── TRIVIA QUIZ ─── */
+  .qz-wrap { font-family: 'Press Start 2P', 'Courier New', monospace; background: #1a1a2e; border-radius: 12px; overflow: hidden; border: 3px solid #F4614A; position: relative; max-width: 820px; }
+  #qz-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+  .qz-flash { position: absolute; inset: 0; pointer-events: none; z-index: 9; opacity: 0; }
+  .qz-flash.green { background: rgba(29,158,117,.18); animation: qzFlash .5s ease-out forwards; }
+  .qz-flash.red { background: rgba(153,60,29,.22); animation: qzFlash .5s ease-out forwards; }
+  @keyframes qzFlash { from { opacity: 1; } to { opacity: 0; } }
+  .qz-header { background: #F4614A; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .qz-header-title { color: #fff; font-size: 13px; letter-spacing: 1px; }
+  .qz-score { background: #1a1a2e; color: #FFD87A; font-size: 12px; padding: 7px 11px; border-radius: 4px; white-space: nowrap; }
+  .qz-score.bump { animation: qzBump .4s ease-out; }
+  @keyframes qzBump { 0% { transform: scale(1); } 40% { transform: scale(1.3); color: #3EC8D4; } 100% { transform: scale(1); } }
+  .qz-body { padding: 28px 24px 24px; position: relative; }
+  .qz-progress-wrap { background: #2d2d4e; border-radius: 3px; height: 8px; margin-bottom: 24px; overflow: hidden; border: 1px solid #3EC8D4; }
+  .qz-progress { height: 100%; background: #3EC8D4; transition: width .4s; border-radius: 2px; }
+  .qz-num { font-size: 11px; color: #F2B8B0; margin-bottom: 12px; letter-spacing: 1px; }
+  .qz-question { font-size: 15px; color: #fff; line-height: 1.9; margin-bottom: 24px; min-height: 58px; }
+  .qz-answers { display: flex; flex-direction: column; gap: 10px; }
+  .qz-answer { font-family: inherit; font-size: 12px; background: #2d2d4e; color: #fff; border: 2px solid #534AB7; border-radius: 4px; padding: 13px 15px; cursor: pointer; text-align: left; line-height: 1.7; transition: border-color .1s, background .1s; }
+  .qz-answer:hover:not(:disabled) { background: #3d3d6e; border-color: #3EC8D4; }
+  .qz-answer:disabled { cursor: default; opacity: .88; }
+  .qz-answer.correct { background: #1D9E75; border-color: #3EC8D4; animation: qzCorrect .5s ease-out; }
+  .qz-answer.wrong { background: #993C1D; border-color: #F4614A; animation: qzShake .4s ease-out; }
+  @keyframes qzCorrect {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(62,200,212,.8); }
+    30% { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(62,200,212,.3); }
+    60% { transform: scale(.99); box-shadow: 0 0 0 14px rgba(62,200,212,0); }
+    100% { transform: scale(1); box-shadow: none; }
+  }
+  @keyframes qzShake {
+    0% { transform: translateX(0); } 15% { transform: translateX(-7px); } 30% { transform: translateX(7px); }
+    45% { transform: translateX(-5px); } 60% { transform: translateX(5px); } 75% { transform: translateX(-2px); } 100% { transform: translateX(0); }
+  }
+  .qz-feedback { margin-top: 16px; font-size: 11px; line-height: 1.9; min-height: 40px; display: none; animation: qzFade .3s ease-out; }
+  .qz-feedback.show { display: block; }
+  @keyframes qzFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .qz-next, .qz-replay { font-family: inherit; font-size: 12px; border: none; border-radius: 4px; padding: 13px 22px; cursor: pointer; letter-spacing: 1px; }
+  .qz-next { background: #F4614A; color: #fff; margin-top: 16px; display: none; animation: qzFade .3s ease-out; }
+  .qz-next:hover { background: #d94d38; }
+  .qz-next.show { display: inline-block; }
+  .qz-replay { background: #3EC8D4; color: #1a1a2e; }
+  .qz-replay:hover { background: #2aa8b4; }
+  .qz-result { display: none; text-align: center; padding: 8px 0; }
+  .qz-result.show { display: block; animation: qzFade .4s ease-out; }
+  .qz-sprite { display: block; font-size: 34px; margin-bottom: 14px; animation: qzBounce .6s ease-out; }
+  @keyframes qzBounce { 0% { transform: translateY(-20px); opacity: 0; } 60% { transform: translateY(4px); } 80% { transform: translateY(-4px); } 100% { transform: translateY(0); opacity: 1; } }
+  .qz-result-title { font-size: 18px; color: #FFD87A; margin-bottom: 16px; line-height: 1.8; }
+  .qz-result-score { font-size: 34px; color: #F4614A; margin-bottom: 12px; }
+  .qz-stars { font-size: 22px; color: #FFD87A; margin-bottom: 16px; }
+  .qz-result-msg { font-size: 12px; color: #F2B8B0; line-height: 2.1; margin-bottom: 24px; white-space: pre-line; }
+  @media (max-width: 600px) {
+    .qz-body { padding: 22px 16px 20px; }
+    .qz-header-title { font-size: 11px; }
+    .qz-question { font-size: 13px; }
+    .qz-answer { font-size: 11px; }
+    .qz-feedback { font-size: 10px; }
+    .qz-result-title { font-size: 15px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .qz-answer.correct, .qz-answer.wrong, .qz-score.bump, .qz-sprite, .qz-flash { animation: none; }
+  }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -1697,6 +1762,48 @@
 </div>
 
 <!-- ============================================================
+     TRIVIA QUIZ
+     ─────────────────────────────────────────────────────────────
+     10 questions about me, answers shuffle on every play.
+     To change a question, edit the QUESTIONS list in the
+     "Trivia quiz" script block (search for QZ_EDIT):
+       q = question, a = 4 answers, correct = index of the right
+       answer (0–3), fact = text shown after answering.
+     The 8-bit font (Press Start 2P) loads from Google Fonts in
+     the <head>; without it the quiz falls back to Courier New.
+     ============================================================ -->
+<div class="sec-label">trivia.exe</div>
+<div class="section">
+  <div class="section-title">how well do you know me?</div>
+  <div class="qz-wrap" id="qz-wrap">
+    <canvas id="qz-canvas" aria-hidden="true"></canvas>
+    <div class="qz-flash" id="qz-flash" aria-hidden="true"></div>
+    <div class="qz-header">
+      <span class="qz-header-title">⬛ MEG TRIVIA ⬛</span>
+      <span class="qz-score" id="qz-score">★ 0 / 10</span>
+    </div>
+    <div class="qz-body">
+      <div id="qz-q-area">
+        <div class="qz-progress-wrap"><div class="qz-progress" id="qz-progress"></div></div>
+        <div class="qz-num" id="qz-num"></div>
+        <div class="qz-question" id="qz-question"></div>
+        <div class="qz-answers" id="qz-answers"></div>
+        <div class="qz-feedback" id="qz-feedback" aria-live="polite"></div>
+        <button type="button" class="qz-next" id="qz-next">NEXT ▶</button>
+      </div>
+      <div class="qz-result" id="qz-result">
+        <span class="qz-sprite" id="qz-sprite">🏆</span>
+        <div class="qz-result-title" id="qz-result-title"></div>
+        <div class="qz-result-score" id="qz-result-score"></div>
+        <div class="qz-stars" id="qz-stars"></div>
+        <div class="qz-result-msg" id="qz-result-msg"></div>
+        <button type="button" class="qz-replay" id="qz-replay">▶ PLAY AGAIN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
      FOOTER
      ─────────────────────────────────────────────────────────────
      EDIT: name, tagline, links (replace # with real URLs)
@@ -2104,6 +2211,194 @@
       const e = entries[0];
       bar.classList.toggle('stuck', !e.isIntersecting && e.boundingClientRect.top < 0);
     }, { threshold: 0 }).observe(s);
+  })();
+
+  // ── Trivia quiz ──
+  // QZ_EDIT: q = question, a = 4 answers, correct = index (0-3) of the right answer, fact = shown after answering
+  (function () {
+    const QUESTIONS = [
+      { q: "What city does Meg call home?", a: ["Bratislava", "Prague", "Košice", "Brno"], correct: 2,
+        fact: "Košice — Slovakia's second-largest city and a creative industry hub!" },
+      { q: "What is the name of Meg's personal blog about internet history and tech sociology?", a: ["DataMeg", "Meg_a_data", "InternetDiary", "TechSociologist"], correct: 1,
+        fact: "Meg_a_data — long-form for people who still read long things." },
+      { q: "How many countries did Meg write UX copy for at Tatra banka / RBI?", a: ["7 countries", "10 countries", "13 countries", "20 countries"], correct: 2,
+        fact: "13 countries — in English and Slovak, using Lokalise and Localazy." },
+      { q: "What style of dance did Meg teach in Košice?", a: ["Salsa", "Lindy Hop", "Tango", "Ballet"], correct: 1,
+        fact: "Lindy Hop! She co-founded the swing dance community in Košice and taught for two years. Now she's exploring ballet." },
+      { q: "What is Meg's LinkedIn handle and personal brand name?", a: ["megwriter", "halkova_me", "affectionner", "wordaddict"], correct: 2,
+        fact: "Affectionner — French for 'to be fond of'. Literary and internet-native." },
+      { q: "What was the topic of Meg's MA thesis?", a: ["Amateur videos on the internet", "AI ethics in media", "Information literacy on social media among seniors", "Digital citizenship in schools"], correct: 2,
+        fact: "University of Žilina, 2020 — digital education meets media studies." },
+      { q: "How many in-house conferences did Meg organise at RBI in two years?", a: ["2", "3", "5", "8"], correct: 2,
+        fact: "Five conferences for 80+ international designers. Good events feel effortless — with good teamwork!" },
+      { q: "What is Meg's personal tagline?", a: ["Word Nerd", "Internet Lover", "Wor(l)d addict", "Digital Nomad"], correct: 2,
+        fact: "Wor(l)d addict — the (l) works overtime. Words AND worlds." },
+      { q: "Which Samuel Beckett quote appears on Meg's CV?", a: ["I can't go on, I'll go on.", "Ever tried. Ever failed. No matter. Try again. Fail again. Fail better.", "Words are all we have.", "Habit is a great deadener."], correct: 1,
+        fact: "The quintessential Beckett — resilience, iteration, and beautiful chaos." },
+      { q: "What organisation is Meg currently Secretary of?", a: ["Slovak Journalists Association", "Erasmus+ Network Slovakia", "Slovak User Experience Association", "Creative Industry Košice"], correct: 2,
+        fact: "The Slovak UX Association — where people meet and share." }
+    ];
+
+    const $ = id => document.getElementById(id);
+    const wrap = $('qz-wrap');
+    if (!wrap) return;
+    const canvas = $('qz-canvas');
+    const ctx = canvas.getContext ? canvas.getContext('2d') : null;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const total = QUESTIONS.length;
+    let current = 0, score = 0, answered = false;
+
+    // ── particles ──
+    let particles = [], raf = 0;
+    function resizeCanvas() { canvas.width = wrap.offsetWidth; canvas.height = wrap.offsetHeight; }
+    function Particle(x, y, color, type) {
+      this.x = x; this.y = y; this.color = color; this.type = type;
+      this.size = Math.random() * 6 + 3;
+      this.vx = (Math.random() - 0.5) * (type === 'star' ? 6 : 5);
+      this.vy = Math.random() * -7 - 2;
+      this.life = 1;
+      this.decay = Math.random() * 0.025 + 0.018;
+      this.rot = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.15;
+    }
+    Particle.prototype.update = function () {
+      this.x += this.vx; this.vy += 0.25; this.y += this.vy;
+      this.life -= this.decay; this.rot += this.rotSpeed; this.vx *= 0.98;
+    };
+    Particle.prototype.draw = function () {
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.life);
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.fillStyle = this.color;
+      if (this.type === 'star') { ctx.font = (this.size * 2.5) + 'px serif'; ctx.fillText('★', -this.size, this.size); }
+      else if (this.type === 'pixel') { ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size); }
+      else { ctx.beginPath(); ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    };
+    function burst(kind) {
+      if (!ctx || reduce) return;
+      resizeCanvas();
+      cancelAnimationFrame(raf);
+      particles = [];
+      const cx = canvas.width / 2, cy = canvas.height * 0.55;
+      if (kind === 'correct') {
+        const colors = ['#3EC8D4', '#FFD87A', '#F2B8B0', '#9B6DFF', '#ffffff'];
+        const types = ['star', 'pixel', 'circle'];
+        for (let i = 0; i < 48; i++) {
+          particles.push(new Particle(cx + (Math.random() - 0.5) * 120, cy + (Math.random() - 0.5) * 40,
+            colors[Math.floor(Math.random() * colors.length)], types[i % 3]));
+        }
+      } else {
+        const colors = ['#F4614A', '#993C1D', '#FFD87A', '#ff6b6b'];
+        for (let i = 0; i < 30; i++) {
+          particles.push(new Particle(cx + (Math.random() - 0.5) * 100, cy + (Math.random() - 0.5) * 30,
+            colors[Math.floor(Math.random() * colors.length)], 'pixel'));
+        }
+      }
+      (function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles = particles.filter(p => p.life > 0);
+        particles.forEach(p => { p.update(); p.draw(); });
+        if (particles.length) raf = requestAnimationFrame(tick); else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      })();
+    }
+    function flash(kind) {
+      const el = $('qz-flash');
+      el.className = 'qz-flash';
+      void el.offsetWidth;
+      el.className = 'qz-flash ' + (kind === 'correct' ? 'green' : 'red');
+    }
+
+    // ── quiz flow ──
+    const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+    function setScore() { $('qz-score').textContent = '★ ' + score + ' / ' + total; }
+
+    function loadQ() {
+      const q = QUESTIONS[current];
+      $('qz-num').textContent = 'QUESTION ' + (current + 1) + ' / ' + total;
+      $('qz-question').textContent = q.q;
+      $('qz-progress').style.width = ((current + 1) / total * 100) + '%';
+      const fb = $('qz-feedback'); fb.classList.remove('show'); fb.textContent = '';
+      $('qz-next').classList.remove('show');
+      answered = false;
+      if (ctx) { particles = []; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+      const order = shuffle([0, 1, 2, 3]);
+      const correctPos = order.indexOf(q.correct);
+      const box = $('qz-answers');
+      box.innerHTML = '';
+      order.forEach((orig, pos) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'qz-answer';
+        b.textContent = q.a[orig];
+        b.addEventListener('click', () => answer(pos, correctPos, q.fact));
+        box.appendChild(b);
+      });
+    }
+
+    function answer(chosen, correctPos, fact) {
+      if (answered) return;
+      answered = true;
+      const btns = document.querySelectorAll('#qz-answers .qz-answer');
+      btns.forEach(b => { b.disabled = true; });
+      const fb = $('qz-feedback');
+      if (chosen === correctPos) {
+        score++;
+        btns[chosen].classList.add('correct');
+        fb.textContent = '✓ CORRECT! ' + fact;
+        fb.style.color = '#3EC8D4';
+        flash('correct');
+        setTimeout(() => burst('correct'), 80);
+        const sb = $('qz-score');
+        setScore();
+        sb.classList.remove('bump'); void sb.offsetWidth; sb.classList.add('bump');
+      } else {
+        btns[chosen].classList.add('wrong');
+        btns[correctPos].classList.add('correct');
+        fb.textContent = '✗ NOT QUITE. ' + fact;
+        fb.style.color = '#F2B8B0';
+        flash('wrong');
+        setTimeout(() => burst('wrong'), 80);
+      }
+      fb.classList.add('show');
+      if (current < total - 1) $('qz-next').classList.add('show');
+      else setTimeout(showResult, 1600);
+    }
+
+    function showResult() {
+      $('qz-q-area').style.display = 'none';
+      $('qz-result').classList.add('show');
+      $('qz-result-score').textContent = score + ' / ' + total;
+      const pct = score / total;
+      let sprite, title, msg, stars;
+      if (pct === 1)       { sprite = '🏆'; stars = '★★★★★'; title = 'PERFECT SCORE!'; msg = "You know Meg better than her CV does.\nAre you sure you haven't met?"; }
+      else if (pct >= 0.8) { sprite = '⭐'; stars = '★★★★☆'; title = 'IMPRESSIVE!'; msg = "You clearly paid attention.\nCheck the blog for extra credit."; }
+      else if (pct >= 0.6) { sprite = '🎮'; stars = '★★★☆☆'; title = 'NOT BAD!'; msg = "Solid effort. Browse the folders above\nto fill in the gaps."; }
+      else if (pct >= 0.4) { sprite = '📖'; stars = '★★☆☆☆'; title = 'KEEP EXPLORING'; msg = "There's more to Meg than meets the eye.\nTry again after reading the full page!"; }
+      else                 { sprite = '🕹️'; stars = '★☆☆☆☆'; title = 'GAME OVER?'; msg = "Bold attempt. The folders above\nare your study guide. Good luck!"; }
+      $('qz-sprite').textContent = sprite;
+      $('qz-result-title').textContent = title;
+      $('qz-stars').textContent = stars;
+      $('qz-result-msg').textContent = msg;
+      setTimeout(() => burst('correct'), 300);
+    }
+
+    function restart() {
+      current = 0; score = 0; answered = false;
+      setScore();
+      $('qz-result').classList.remove('show');
+      $('qz-q-area').style.display = '';
+      if (ctx) { particles = []; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+      loadQ();
+    }
+
+    $('qz-next').addEventListener('click', () => { current++; loadQ(); });
+    $('qz-replay').addEventListener('click', restart);
+    window.addEventListener('resize', () => { if (ctx) resizeCanvas(); });
+    resizeCanvas();
+    setScore();
+    loadQ();
   })();
 </script>
 
